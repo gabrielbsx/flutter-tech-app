@@ -18,6 +18,45 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  'https://avatars.githubusercontent.com/u/29743758?v=4',
+                ),
+              ),
+              accountName: Text('Gabriel'),
+              accountEmail: Text('gabrielturing@gmail.com'),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text(
+                'Item 1',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                print('Item 1');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text(
+                'Item 2',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              onTap: () {
+                print('Item 2');
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text(
           'Fintech',
