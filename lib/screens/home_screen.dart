@@ -1,4 +1,3 @@
-import 'package:fintech/application/app_controller.dart';
 import 'package:fintech/components/custom_switch.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +29,41 @@ class _HomeScreenState extends State<HomeScreen> {
           Icons.add,
         ),
       ),
-      body: Center(
-        child: CustomSwitch(),
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            CustomSwitch(),
+            Text(
+              'Contador: $counter',
+              style: TextStyle(
+                fontSize: 24,
+              ),
+            ),
+            Container(
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  color: Colors.red,
+                ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  color: Colors.green,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
