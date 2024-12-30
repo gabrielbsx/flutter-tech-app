@@ -1,7 +1,19 @@
+import 'package:fintech/src/models/currency_model.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyInputGroup extends StatelessWidget {
-  const CurrencyInputGroup({super.key});
+  final List<CurrencyModel> items;
+  final TextEditingController controller;
+  final CurrencyModel selectedItem;
+  final void Function(CurrencyModel model) onChanged;
+
+  const CurrencyInputGroup({
+    super.key,
+    required this.items,
+    required this.controller,
+    required this.onChanged,
+    required this.selectedItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +25,7 @@ class CurrencyInputGroup extends StatelessWidget {
           child: SizedBox(
             height: 64.0,
             child: DropdownButton<String>(
-              value: 'Real',
+              value: selectedItem.name,
               iconSize: 24,
               elevation: 16,
               isExpanded: true,
@@ -22,19 +34,17 @@ class CurrencyInputGroup extends StatelessWidget {
                 height: 1,
                 color: Colors.amber,
               ),
-              items: [
-                'Real',
-                'Dollar',
-                'Euro',
-                'Pound',
-                'Yen',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (value) {},
+              items: items
+                  .map(
+                    (value) => DropdownMenuItem<String>(
+                      value: value.name,
+                      child: Text(value.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (String? value) {
+                onChanged(items.firstWhere((element) => element.name == value));
+              },
             ),
           ),
         ),
@@ -44,6 +54,7 @@ class CurrencyInputGroup extends StatelessWidget {
         Expanded(
           flex: 2,
           child: TextField(
+            controller: controller,
             decoration: InputDecoration(
               labelText: 'Valor',
               enabledBorder: UnderlineInputBorder(
